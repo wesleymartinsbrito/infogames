@@ -5,6 +5,7 @@ import com.wesleymartins.infogames.dto.GameListDTO;
 import com.wesleymartins.infogames.dto.GameMinDTO;
 import com.wesleymartins.infogames.entities.Game;
 import com.wesleymartins.infogames.entities.GameList;
+import com.wesleymartins.infogames.projections.GameMinProjection;
 import com.wesleymartins.infogames.repositories.GameListRepository;
 import com.wesleymartins.infogames.repositories.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,4 +32,13 @@ public class GameService {
         return result.stream().map(GameMinDTO::new).toList();
     }
 
+    public List<GameMinDTO> findByList(Long listId){
+        List<GameMinProjection> result = gameRepository.searchByList(listId);
+        return result.stream().map(GameMinDTO::new).toList();
+    }
+
+    @Transactional(readOnly = false)
+    public Game insert(Game entity) {
+        return gameRepository.save(entity);
+    }
 }
