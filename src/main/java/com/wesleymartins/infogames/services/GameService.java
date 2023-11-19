@@ -41,4 +41,8 @@ public class GameService {
     public Game insert(Game entity) {
         return gameRepository.save(entity);
     }
+
+    public void delete(Long id){
+        gameRepository.deleteById(id);
+    }
 }

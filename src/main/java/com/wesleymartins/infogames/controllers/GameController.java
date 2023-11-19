@@ -32,4 +32,10 @@ public class GameController {
         entity = gameService.insert(entity);
         return ResponseEntity.ok().body(entity);
     }
+
+   @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete (@PathVariable Long id){
+        gameService.delete(id);
+        return ResponseEntity.noContent().build();
+   }
 }
