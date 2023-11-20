@@ -63,4 +63,13 @@ public class GameService {
         entity.setShortDescription(obj.getShortDescription());
     }
 
+    public Game updateTitle (Long id, Game obj){
+        Game entity = gameRepository.getReferenceById(id);
+        updateTitleMethod(entity, obj);
+        return gameRepository.save(entity);
+    }
+
+    private void updateTitleMethod(Game entity, Game obj) {
+        entity.setTitle(obj.getTitle());
+    }
 }
