@@ -32,4 +32,6 @@ public class GameListController {
         List<GameMinDTO> result = gameService.findByList(listId);
         return result;
     }
+
+
 }

@@ -63,6 +63,7 @@ public class GameService {
         entity.setShortDescription(obj.getShortDescription());
     }
 
+    @Transactional(readOnly = false)
     public Game updateTitle (Long id, Game obj){
         Game entity = gameRepository.getReferenceById(id);
         updateTitleMethod(entity, obj);
@@ -71,5 +72,16 @@ public class GameService {
 
     private void updateTitleMethod(Game entity, Game obj) {
         entity.setTitle(obj.getTitle());
+    }
+
+    @Transactional(readOnly = false)
+    public Game updateScore (Long id, Game obj){
+        Game entity = gameRepository.getReferenceById(id);
+        updateScoreMethod(entity, obj);
+        return gameRepository.save(entity);
+    }
+
+    private void updateScoreMethod(Game entity, Game obj) {
+        entity.setScore(obj.getScore());
     }
 }

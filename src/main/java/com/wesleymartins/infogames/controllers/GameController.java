@@ -50,4 +50,10 @@ public class GameController {
         entity = gameService.updateTitle(id, entity);
         return ResponseEntity.ok().body(entity);
    }
+
+    @PutMapping(value = "/{id}/score")
+    public ResponseEntity<Game> updateScore (@PathVariable Long id, @RequestBody Game entity){
+        entity = gameService.updateScore(id, entity);
+        return ResponseEntity.ok().body(entity);
+    }
 }
