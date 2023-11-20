@@ -42,7 +42,25 @@ public class GameService {
         return gameRepository.save(entity);
     }
 
+    @Transactional(readOnly = false)
     public void delete(Long id){
         gameRepository.deleteById(id);
     }
+
+    @Transactional(readOnly = false)
+    public Game update(Long id, Game obj) {
+    Game entity = gameRepository.getReferenceById(id);
+    updateEntity(entity, obj);
+    return gameRepository.save(entity);
+    }
+
+    private void updateEntity (Game entity, Game obj){
+        entity.setImgUrl(obj.getImgUrl());
+        entity.setScore(obj.getScore());
+        entity.setPlatforms(obj.getPlatforms());
+        entity.setTitle(obj.getTitle());
+        entity.setLongDescription(obj.getLongDescription());
+        entity.setShortDescription(obj.getShortDescription());
+    }
+
 }

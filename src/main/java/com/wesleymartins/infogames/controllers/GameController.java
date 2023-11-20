@@ -38,4 +38,10 @@ public class GameController {
         gameService.delete(id);
         return ResponseEntity.noContent().build();
    }
+
+   @PutMapping(value = "/{id}")
+    public ResponseEntity<Game> update (@PathVariable Long id, @RequestBody Game entity){
+        entity = gameService.update(id, entity);
+        return ResponseEntity.ok().body(entity);
+   }
 }
