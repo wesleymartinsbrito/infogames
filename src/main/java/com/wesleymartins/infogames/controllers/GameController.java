@@ -56,4 +56,16 @@ public class GameController {
         entity = gameService.updateScore(id, entity);
         return ResponseEntity.ok().body(entity);
     }
+
+    @PutMapping(value = "/{id}/imgUrl")
+    public ResponseEntity<Game> updateImgUrl(@PathVariable Long id, @RequestBody Game entity){
+        entity = gameService.updateImgUrl(id, entity);
+        return ResponseEntity.ok().body(entity);
+    }
+
+    @PutMapping(value = "/{id}/platforms")
+    public ResponseEntity<Game> updatePlatforms(@PathVariable Long id, @RequestBody Game entity){
+        entity = gameService.updatePlatforms(id, entity);
+        return ResponseEntity.ok().body(entity);
+    }
 }

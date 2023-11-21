@@ -59,8 +59,6 @@ public class GameService {
         entity.setScore(obj.getScore());
         entity.setPlatforms(obj.getPlatforms());
         entity.setTitle(obj.getTitle());
-        entity.setLongDescription(obj.getLongDescription());
-        entity.setShortDescription(obj.getShortDescription());
     }
 
     @Transactional(readOnly = false)
@@ -83,5 +81,25 @@ public class GameService {
 
     private void updateScoreMethod(Game entity, Game obj) {
         entity.setScore(obj.getScore());
+    }
+
+    public  Game updateImgUrl (Long id, Game obj){
+        Game entity = gameRepository.getReferenceById(id);
+        updateImgUrlMethod(entity, obj);
+        return gameRepository.save(entity);
+    }
+
+    private void updateImgUrlMethod(Game entity, Game obj) {
+        entity.setImgUrl(obj.getImgUrl());
+    }
+
+    public Game updatePlatforms (Long id, Game obj){
+        Game entity = gameRepository.getReferenceById(id);
+        updatePlatformsMethod(entity, obj);
+        return gameRepository.save(entity);
+    }
+
+    private void updatePlatformsMethod(Game entity, Game obj) {
+        entity.setPlatforms(obj.getPlatforms());
     }
 }
