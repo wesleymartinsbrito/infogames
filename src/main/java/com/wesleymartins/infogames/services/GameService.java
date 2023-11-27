@@ -8,11 +8,18 @@ import com.wesleymartins.infogames.entities.GameList;
 import com.wesleymartins.infogames.projections.GameMinProjection;
 import com.wesleymartins.infogames.repositories.GameListRepository;
 import com.wesleymartins.infogames.repositories.GameRepository;
+import com.wesleymartins.infogames.services.exceptions.DatabaseException;
+import com.wesleymartins.infogames.services.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.module.ResolutionException;
 import java.util.List;
 
 @Service
@@ -23,7 +30,7 @@ public class GameService {
 
     @Transactional(readOnly = true)
     public GameDTO findById(Long id){
-        Game result = gameRepository.findById(id).get();
+        Game result = gameRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Recurso não encontrado"));
         return new GameDTO(result);
     }
     @Transactional(readOnly = true)
@@ -33,8 +40,13 @@ public class GameService {
     }
 
     public List<GameMinDTO> findByList(Long listId){
-        List<GameMinProjection> result = gameRepository.searchByList(listId);
-        return result.stream().map(GameMinDTO::new).toList();
+        try {
+            List<GameMinProjection> result = gameRepository.searchByList(listId);
+            return result.stream().map(GameMinDTO::new).toList();
+        }
+        catch (EntityNotFoundException e){
+            throw new ResourceNotFoundException("Recurso não encontrado");
+        }
     }
 
     @Transactional(readOnly = false)
@@ -42,16 +54,29 @@ public class GameService {
         return gameRepository.save(entity);
     }
 
-    @Transactional(readOnly = false)
+    @Transactional(propagation = Propagation.SUPPORTS)
     public void delete(Long id){
-        gameRepository.deleteById(id);
+        try {
+            gameRepository.deleteById(id);
+        }
+        catch (EmptyResultDataAccessException e){
+            throw new ResourceNotFoundException("Recurso não encontrado");
+        }
+        catch (DataIntegrityViolationException e){
+            throw new DatabaseException("Falha de integridade referencial");
+        }
     }
 
     @Transactional(readOnly = false)
     public Game update(Long id, Game obj) {
-    Game entity = gameRepository.getReferenceById(id);
-    updateEntity(entity, obj);
-    return gameRepository.save(entity);
+        try {
+            Game entity = gameRepository.getReferenceById(id);
+            updateEntity(entity, obj);
+            return gameRepository.save(entity);
+        }
+        catch (EntityNotFoundException e){
+            throw new ResourceNotFoundException("Recurso não encontrado");
+        }
     }
 
     private void updateEntity (Game entity, Game obj){
@@ -83,6 +108,7 @@ public class GameService {
         entity.setScore(obj.getScore());
     }
 
+    @Transactional(readOnly = false)
     public  Game updateImgUrl (Long id, Game obj){
         Game entity = gameRepository.getReferenceById(id);
         updateImgUrlMethod(entity, obj);
@@ -93,6 +119,7 @@ public class GameService {
         entity.setImgUrl(obj.getImgUrl());
     }
 
+    @Transactional(readOnly = false)
     public Game updatePlatforms (Long id, Game obj){
         Game entity = gameRepository.getReferenceById(id);
         updatePlatformsMethod(entity, obj);
