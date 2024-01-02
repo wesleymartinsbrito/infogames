@@ -1,9 +1,9 @@
-# School API 
+# InfoGames 
 [![NPM](https://img.shields.io/npm/l/react)](https://github.com/wesleymartinsbrito/api-school/blob/main/LICENSE) 
 
 # Sobre o projeto
 
-Uma API Rest que disponibilize o endpoint /students por meio do qual pode-se obter uma lista de alunos com suas respectivas turmas. Os alunos serão instanciados no método hard code. Um aluno é associado a apenas uma classe, porém, uma classe está associada a vários alunos. 
+Uma API Rest que disponibiliza o endpoint /games e /lists por meio do qual pode-se obter uma lista de jogos, lista filtradas por tipos, além de permitir a criação, atualização e exclusão dos jogos e listas por completo ou de pontos específicos de cada um. Os jogos e listas já possuem seed inicial para testes, porém, é possível excluir ou atualizar os dados pré-existentes. Um jogo é atribuido a uma lista e uma lista a vários jogos. 
 
 ## Diagrama
 ![Diagrama de classes](https://github.com/wesleymartinsbrito/api-school/blob/main/assets/Screenshot_194.png)
