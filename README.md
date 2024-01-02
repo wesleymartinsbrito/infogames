@@ -9,7 +9,7 @@ Uma API Rest que disponibiliza o endpoint /games e /lists por meio do qual pode-
 ![Diagrama de classes](https://github.com/wesleymartinsbrito/api-school/blob/main/assets/Screenshot_194.png)
 
 ## Resultado esperado /games
-![Resultado]((https://github.com/wesleymartinsbrito/infogames/assets/113721470/f9d55759-83f0-4abd-82bb-6cd1d52d470f)
+![Resultado](https://github.com/wesleymartinsbrito/infogames/assets/113721470/f9d55759-83f0-4abd-82bb-6cd1d52d470f
 )
 
 ## Resultado esperado /lists
