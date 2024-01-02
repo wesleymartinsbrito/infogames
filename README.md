@@ -5,9 +5,6 @@
 
 Uma API Rest que disponibiliza o endpoint /games e /lists por meio do qual pode-se obter uma lista de jogos, lista filtradas por tipos, além de permitir a criação, atualização e exclusão dos jogos e listas por completo ou de pontos específicos de cada um. Os jogos e listas já possuem seed inicial para testes, porém, é possível excluir ou atualizar os dados pré-existentes. Um jogo é atribuido a uma lista e uma lista a vários jogos. 
 
-## Diagrama
-![Diagrama de classes](https://github.com/wesleymartinsbrito/api-school/blob/main/assets/Screenshot_194.png)
-
 ## Resultado esperado /games
 ![Resultado](https://github.com/wesleymartinsbrito/infogames/assets/113721470/f9d55759-83f0-4abd-82bb-6cd1d52d470f
 )
